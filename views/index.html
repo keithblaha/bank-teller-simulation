@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bank Teller Simulation</title>
+  <% if(isDevMode) { %>
+    <script type="text/javascript" src="/static/js/require.js"></script>
+  <% } %>
+  <% if(isProdMode) { %>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/requirejs/2.1.11/require.min.js"></script>
+  <% } %>
+  <script type="text/javascript">
+    require.config({
+      baseUrl: '<%= contextPath %>/static/js',
+      paths: {
+        <% if(isDevMode) { %>
+          templates: '<%= contextPath %>/static/templates'
+        <% } %>
+        <% if(isProdMode) { %>
+          backbone: '//cdn.jsdelivr.net/backbonejs/1.1.2/backbone-min',
+          jquery: '//cdn.jsdelivr.net/jquery/1.11.1/jquery.min',
+          'jquery.event.drag': '//cdn.jsdelivr.net/jquery.event.drag/2.2/jquery.event.drag.min',
+          'lodash-src': '//cdn.jsdelivr.net/lodash/2.4.1/lodash.min',
+          raphael: '//cdn.jsdelivr.net/raphael/2.1.2/raphael-min',
+          'socket.io': '//cdn.jsdelivr.net/socket.io-client/1.0.2/socket.io.min',
+          webfont: '//cdn.jsdelivr.net/webfontloader/1.5.2/webfont',
+
+          Sim: 'Sim.min'
+        <% } %>
+      },
+      shim: {
+        'jquery.event.drag': {
+          deps: ['jquery']
+        }
+      },
+      map: {
+        '*': {
+          underscore: 'lodash',
+        }
+      }
+    });
+    define('lodash', ['lodash-src'], function(_) {
+      _.templateSettings.variable = 'd';
+      return _;
+    });
+
+    var fontFamilies = [
+      'Dancing+Script::latin',
+      'Walter+Turncoat::latin'
+    ];
+    WebFontConfig = {
+      <% if(isDevMode) { %>
+        custom: {
+          families: fontFamilies,
+          urls: ['/static/fonts/fonts.css']
+        }
+      <% } %>
+      <% if(isProdMode) { %>
+        google: {
+          families: fontFamilies
+        }
+      <% } %>
+    };
+    require(['Sim', 'jquery', 'webfont'], function(Sim) {
+      $(function() {
+        new Sim('<%= contextPath %>');
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="<%= contextPath %>/static/css/main.css" />
+  <% if(isDevMode) { %>
+    <link href="<%= contextPath %>/static/css/font-awesome.css" rel="stylesheet">
+  <% } %>
+  <% if(isProdMode) { %>
+    <link href="//cdn.jsdelivr.net/fontawesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <% } %>
+</head>
+<body class="<%= branding %>">
+  <div style="visibility: hidden;" id="container">
+    <div style="text-align:center;padding-top:100px;padding-left:420px;">
+      <p>This simulation will present you with several scenarios</p>
+      <p>It is up to you to deal with the customers' requests</p>
+      <p>Press the start button when you are prepared to begin</p>
+      <br>
+      <div id="start" class="button">Start</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,4 @@
+/less/compiled
+/node_modules
+/require/js/compiled
+*.swp

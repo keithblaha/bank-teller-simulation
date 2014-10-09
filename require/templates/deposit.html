@@ -1,0 +1,37 @@
+<% /* todo - make these custom for each bank */ %>
+<div id="<%= d.id %>" class="deposit draggable">
+  <div class="left">
+    <div class="label">
+      <span>DEPOSIT SLIP</span>
+    </div>
+    <div class="name">
+      <div><span id="<%= d.name.i %>" class="info handwritten"><%= d.name.v %></span></div>
+    </div>
+    <div class="date">
+      <div><span id="<%= d.date.i %>" class="info handwritten"><%= d.date.v %></span></div>
+    </div>
+    <div>
+      <span>ACCOUNT NO.</span>
+      <div class="account">
+        <span id="<%= d.account.i %>" class="info handwritten"><%= d.account.v %></span>
+      </div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="cash">
+      <span id="<%= d.cash.i %>" class="info handwritten"><%= d.cash.v %></span>
+    </div>
+    <div class="checks">
+      <span id="<%= d.checks.i %>" class="info handwritten"><%= d.checks.v %></span>
+    </div>
+    <div class="subtotal">
+      <span id="<%= d.subtotal.i %>" class="info handwritten"><%= d.subtotal.v %></span>
+    </div>
+    <div class="received">
+      <span id="<%= d.received.i %>" class="info handwritten"><%= d.received.v %></span>
+    </div>
+    <div class="total">
+      <span id="<%= d.total.i %>" class="info handwritten"><%= d.total.v %></span>
+    </div>
+  </div>
+</div>

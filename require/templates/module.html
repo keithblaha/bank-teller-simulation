@@ -1,0 +1,39 @@
+<div id="modules">
+  <div id="rulebook" class="module selected">
+    <ul>
+      <% _.each(d.r, function(r, i) { %>
+        <li id="rule<%= i %>"><span id="r<%= i %>" class="info"><%= r %></span></li>
+      <% }) %>
+    </ul>
+  </div>
+  <div id="accounts" class="module">
+    <div id="customer-name" class="customer">
+      <span><b>Customer: </b></span>
+      <span id="c0" class="info"><%= d.c.name %></span>
+    </div>
+    <% _.each(d.c.accounts, function(a, i) { %>
+      <div class="account">
+        <div id="a<%= i %>number-container">
+          <span><b>Number: </b></span>
+          <span id="a<%= i %>number" class="info"><%= a.number %></span>
+        </div>
+        <div id="a<%= i %>type-container">
+          <span><b>Type: </b></span>
+          <span id="a<%= i %>type" class="info"><%= a.type %></span>
+        </div>
+        <div id="a<%= i %>balance-container">
+          <span><b>Balance: </b></span>
+          <span id="a<%= i %>balance" class="info"><%= a.balance %></span>
+        </div>
+        <div id="a<%= i %>since-container">
+          <span><b>Open since: </b></span>
+          <span id="a<%= i %>since" class="info"><%= a.since %></span>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<div id="module-selectors">
+  <div id="rulebook-selector" class="module-selector selected">Rulebook</div>
+  <div id="accounts-selector" class="module-selector">Accounts</div>
+</div>

@@ -1,0 +1,37 @@
+<% /* todo - make these custom for each bank */ %>
+<div id="<%= d.id %>" class="withdrawal draggable">
+  <div class="label">
+    <span>WITHDRAWAL SLIP</span>
+  </div>
+  <div>
+    <div class="name">
+      <div>
+        <span id="<%= d.name.i %>" class="info handwritten"><%= d.name.v %></span>
+      </div>
+    </div>
+    <div class="date">
+      <div>
+        <span id="<%= d.date.i %>" class="info handwritten"><%= d.date.v %></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="signed">
+      <div>
+        <span id="<%= d.signed.i %>" class="info signature"><%= d.signed.v %></span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="account">
+      <div>
+        <span id="<%= d.account.i %>" class="info handwritten"><%= d.account.v %></span>
+      </div>
+    </div>
+    <div class="amount">
+      <div>
+        <span id="<%= d.amount.i %>" class="info handwritten"><%= d.amount.v %></span>
+      </div>
+    </div>
+  </div>
+</div>

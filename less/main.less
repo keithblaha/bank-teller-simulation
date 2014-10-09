@@ -1,0 +1,690 @@
+/*
+ * Variables
+*/
+
+@correlate-color: red; // must match color in overlay.js
+@correlate-thickness: 2px;
+
+@customer-pic-width: 300px;
+
+@overlay-z-index: 1;
+
+@small-font-size: 11px;
+
+/*
+ * Mixins
+*/
+
+.prevent-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.over-overlay {
+  position: relative;
+  z-index: @overlay-z-index + 1;
+}
+
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+/*
+ * General styles
+*/
+
+* {
+  cursor: default;
+  margin: 0;
+  padding: 0;
+}
+
+p, span {
+  cursor: text;
+}
+
+ol, ul {
+  list-style-position: inside;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/*
+ * Class-specific
+*/
+
+.button {
+  background: lightgrey;
+  border: 1px solid grey;
+  cursor: default;
+  display: inline-block;
+  padding: 0.5em;
+  position: relative;
+  .prevent-select();
+
+  &:not(.deactivated) {
+    cursor: pointer;
+    .over-overlay();
+  }
+  &.deactivated:after {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.5);
+    height: 110%;
+    width: 110%;
+    top: -5%;
+    left: -5%;
+
+    .correlate-mode & {
+      background: none;
+    }
+  }
+}
+
+.draggable {
+  position: absolute;
+  cursor: move;
+
+  div, span {
+    cursor: move;
+    .prevent-select();
+  }
+}
+
+.item {
+  border: 1px solid black;
+  background: white;
+
+  .handwritten {
+    font-family: "Walter Turncoat", cursive;
+  }
+
+  .mirc {
+    font-family: "Courier New", Courier, monospace;
+  }
+
+  .signature {
+    font-family: "Dancing Script", cursive;
+  }
+}
+
+.withdrawal {
+  width: 450px;
+  height: 150px;
+  padding: 1%;
+  .item();
+
+   >div {
+    text-align: left;
+    margin-bottom: 2%;
+
+    div {
+      display: inline-block;
+    }
+
+    &.label {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .account {
+      text-align: center;
+      width: 50%;
+
+      div {
+        border-bottom: 1px solid black;
+        width: 50%;
+        text-align: center;
+      }
+
+      &:before {
+        content: "ACCOUNT NO.";
+        font-size: @small-font-size;
+      }
+    }
+
+    .date {
+      width: 35%;
+
+      div {
+        border-bottom: 1px solid black;
+        width: 97px;
+      }
+
+      &:before {
+        content: "DATE";
+        font-size: @small-font-size;
+      }
+    }
+
+    .name {
+      width: 55%;
+      margin-left: 2%;
+
+      div {
+        width: 76%;
+        border-bottom: 1px solid black;
+      }
+
+      &:before {
+        content: "NAME";
+        font-size: @small-font-size;
+      }
+    }
+
+    .signed {
+      width: 100%;
+
+      &:before {
+        content: "SIGNATURE";
+        font-size: @small-font-size;
+      }
+
+      div {
+        width: 322px;
+        border-bottom: 1px solid black;
+      }
+    }
+
+    .amount {
+      width: 35%;
+      margin-left: 2%;
+
+      &:before {
+        content: "AMOUNT";
+        font-size: @small-font-size;
+      }
+
+      div {
+        width: 100px;
+        border-bottom: 1px solid black;
+
+      }
+    }
+  }
+}
+
+.deposit {
+  width: 450px;
+  height: 160px;
+  padding: 1%;
+  .item();
+
+  >div {
+    display: inline-block;
+
+    &.left {
+      vertical-align: top;
+      text-align: left;
+      width: 54%;
+
+      .label {
+        text-align: right;
+        font-weight: bold;
+      }
+
+      .name {
+        border: 1px solid black;
+
+        >div:before {
+          content: "NAME";
+          vertical-align: top;
+          font-size: @small-font-size;
+          margin-right: 2%;
+        }
+      }
+      .date {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        width: 66%;
+        margin-bottom: 10%;
+
+        >div:before {
+          content: "DATE";
+          vertical-align: top;
+          font-size: @small-font-size;
+          margin-right: 2%;
+        }
+      }
+      .account {
+        border: 1px solid black;
+        margin-bottom: 10%;
+      }
+    }
+    &.right {
+      vertical-align: top;
+      margin-left: 5%;
+      width: 39%;
+      text-align: right;
+      position: relative;
+
+      div {
+        margin-bottom: 5px;
+      }
+
+      .cash:before {
+        content: "CASH";
+        font-size: @small-font-size;
+        position: absolute;
+        left: 0;
+        margin-top: 7px;
+      }
+      .checks:before {
+        content: "CHECKS";
+        font-size: @small-font-size;
+        position: absolute;
+        left: 0;
+        margin-top: 7px;
+      }
+      .subtotal:before {
+        content: "SUBTOTAL";
+        font-size: @small-font-size;
+        position: absolute;
+        left: 0;
+        margin-top: 7px;
+      }
+      .received:before {
+        content: "RECEIVED";
+        width: 1px;
+        font-size: @small-font-size;
+        position: absolute;
+        left: 0;
+        margin-top: 7px;
+      }
+      .total:before {
+        content: "TOTAL";
+        font-size: @small-font-size;
+        position: absolute;
+        left: 0;
+        margin-top: 7px;
+      }
+    }
+  }
+}
+
+.check {
+  width: 400px;
+  height: 170px;
+  padding: 1%;
+  .item();
+
+   >div {
+    text-align: left;
+    margin-bottom: 2%;
+
+    div {
+      display: inline-block;
+      vertical-align: top;
+
+      &.small, .small {
+        font-size: @small-font-size;
+      }
+
+      &.from {
+        width: 49%;
+        text-transform: uppercase;
+      }
+
+      &.date {
+        width: 49%;
+        border-bottom: 1px solid black;
+        position: relative;
+        text-align: center;
+
+        &:before {
+          content: "DATE";
+          font-size: @small-font-size;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+        }
+      }
+
+      &.pay-to {
+        width: 50%;
+        border-bottom: 1px solid black;
+        text-align: left;
+      }
+
+      &.amount {
+        width: 30%;
+        border: 1px solid black;
+        text-align: center;
+        position: relative;
+
+        &:before {
+          content: "$";
+          position: absolute;
+          left: 3px;
+          top: 6px;
+        }
+      }
+
+      &.written-amount {
+        width: 100%;
+        border-bottom: 1px solid black;
+        position: relative;
+
+        &:after {
+          content: "DOLLARS";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          font-size: @small-font-size;
+        }
+      }
+
+      &.memo {
+        height: 25px;
+        width: 40%;
+        border-bottom: 1px solid black;
+        position: relative;
+        text-align: center;
+
+        &:before {
+          content: "MEMO";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          font-size: @small-font-size;
+        }
+      }
+
+      &.signed {
+        margin-left: 9%;
+        width: 49%;
+        border-bottom: 1px solid black;
+        position: relative;
+
+        &:after {
+          content: "MP";
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          font-size: @small-font-size;
+        }
+      }
+    }
+  }
+}
+
+.info {
+  padding: @correlate-thickness * 1.5;
+  display: inline-block;
+}
+
+.panel-container {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.panel {
+  text-align: center;
+}
+
+.popup {
+  position: absolute;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  z-index: @overlay-z-index + 1;
+
+  span {
+    background: white;
+    border: 1px solid black;
+    color: orange;
+    padding: 5px;
+    .border-radius(10px);
+  }
+}
+
+.customer-pic {
+  width: @customer-pic-width;
+}
+
+.thumbnail {
+  width: @customer-pic-width / 3;
+}
+
+/*
+ * Id-specific
+*/
+
+#actions {
+  position: relative;
+  text-align: left;
+  width: 78%;
+
+  .correlate {
+    position: absolute;
+    right: 20px;
+
+    i {
+      cursor: pointer;
+      color: steelblue;
+    }
+  }
+}
+#date-container {
+  width: 19%;
+}
+#container {
+  width: 1000px;
+  height: 800px;
+  background: url("../pictures/background.png") no-repeat;
+  position: relative;
+  z-index: @overlay-z-index - 1;
+
+  &.correlate-mode {
+    .info {
+      cursor: pointer;
+      .prevent-select();
+
+      &:hover, &.correlating {
+        .over-overlay();
+         padding: @correlate-thickness / 2;
+      }
+      &:hover {
+        border: @correlate-thickness dashed @correlate-color;
+      }
+      &.correlating {
+        border: @correlate-thickness solid @correlate-color;
+      }
+    }
+    &.in-progress .info {
+      cursor: wait;
+    }
+  }
+}
+
+#counter {
+  height: 365px;
+  width: 1000px;
+}
+
+#overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  background: rgba(255, 255, 255, 0.5);
+  height: 100%;
+  width: 100%;
+  z-index: @overlay-z-index;
+  pointer-events: none;
+
+  .in-progress & {
+    pointer-events: auto;
+
+    svg { // todo - fix for ie8
+      cursor: wait;
+    }
+  }
+}
+
+// panels
+#action-panel {
+  height: 13%;
+
+  >div {
+    display: inline-block;
+  }
+}
+#customer-panel {
+  position: absolute;
+  bottom: 0;
+  left: 60px;
+}
+#dialogue-panel {
+  vertical-align: top;
+  height: 70px;
+  width: 400px;
+  margin-left: 12px;
+  margin-top: 5px;
+  background: url("../pictures/dialogue.png") no-repeat;
+  position: relative;
+
+  .messages {
+    width: 350px;
+    height: 48px;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+    position: absolute;
+    left: 12px;
+    top: 7px;
+
+    div {
+      display: none;
+
+      &.current {
+        display: block;
+      }
+    }
+
+    span {
+      line-height: 20px;
+      vertical-align: middle;
+    }
+  }
+
+  .scroll {
+    width: 21px;
+    display: inline-block;
+    position: absolute;
+    right: 14px;
+    top: 8px;
+
+    .scroller {
+      cursor: pointer;
+      z-index: @overlay-z-index + 1;
+      position: relative;
+      font-size: 10px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+      .prevent-select();
+
+      i {
+        cursor: pointer;
+      }
+      &.hidden {
+        visibility: hidden;
+      }
+      &.deactivated {
+        z-index: @overlay-z-index - 1;
+        cursor: default;
+
+        i {
+          cursor: default;
+        }
+      }
+      &.up {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}
+#module-panel {
+  height: 83%;
+  padding: 1%;
+}
+
+// panel-containers
+#left-container {
+  width: 427px;
+  height: 400px;
+  position: relative;
+}
+#right-container {
+  width: 525px;
+  height: 300px;
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-bottom: 70px;
+}
+#bottom-container {
+  height: 365px;
+  width: 100%;
+  padding-bottom: 35px;
+}
+
+//module-panel
+#modules, #module-selectors {
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+  padding-top: 3px;
+}
+#modules {
+  width: 79%;
+  overflow-y: auto;
+
+  .module {
+    display: none;
+
+    &.selected {
+      display: block;
+    }
+  }
+}
+#module-selectors {
+  width: 20%;
+
+  .module-selector {
+    margin-bottom: 5px;
+    width: 80px;
+    .button();
+
+    &.selected {
+      font-weight: bold;
+    }
+  }
+}
+#rulebook {
+  text-align: left;
+
+  li .info {
+    max-width: 90%;
+    vertical-align: middle;
+  }
+}
+#accounts {
+  .customer {
+    text-align: left;
+  }
+
+  .account {
+    text-align: left;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+}

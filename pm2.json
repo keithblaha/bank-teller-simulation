@@ -1,0 +1,9 @@
+[
+  {
+    "name": "sim_demo",
+    "script": "./app.js",
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+]

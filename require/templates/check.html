@@ -1,0 +1,45 @@
+<div id="<%= d.id %>" class="check draggable">
+  <div>
+    <div class="from">
+      <span id="<%= d.from.i %>" class="info"><%= d.from.v %></span>
+      <br>
+      <span class="small">
+        <span>1 1ST ST, CITY, CA 94101</span>
+      </span>
+    </div>
+    <div class="date">
+      <span id="<%= d.date.i %>" class="info handwritten"><%= d.date.v %></span>
+    </div>
+  </div>
+  <div>
+    <div class="small" style="text-align: right;">
+      <span>PAY TO THE<br>ORDER OF</span>
+    </div>
+    <div class="pay-to">
+      <span id="<%= d.to.i %>" class="info handwritten"><%= d.to.v %></span>
+    </div>
+    <div class="amount">
+      <span id="<%= d.amount.i %>" class="info handwritten"><%= d.amount.v %></span>
+    </div>
+  </div>
+  <div>
+    <div class="written-amount">
+      <span id="<%= d.writtenAmount.i %>" class="info handwritten"><%= d.writtenAmount.v %></span>
+    </div>
+  </div>
+  <div>
+    <div class="memo">
+      <span class="handwritten"><%= d.memo.v %></span>
+    </div>
+    <div class="signed">
+      <span id="<%= d.signed.i %>" class="info signature"><%= d.signed.v %></span>
+    </div>
+  </div>
+  <div>
+    <div class="mirc small">
+      <span>|:0123456789|:</span>
+      <span>||'1234567||'</span>
+      <span>1001</span>
+    </div>
+  </div>
+</div>
